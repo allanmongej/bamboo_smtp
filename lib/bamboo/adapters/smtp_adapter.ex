@@ -62,7 +62,7 @@ defmodule Bamboo.SMTPAdapter do
     |> config[:transport].send_blocking(gen_smtp_config)
     |> handle_response
   end
-  
+
   @doc false
   def handle_config(config) do
     config
@@ -126,11 +126,11 @@ defmodule Bamboo.SMTPAdapter do
   end
 
   defp add_multipart_header(body, delimiter) do
-    add_smtp_header_line(body, "Content-Type", ~s(multipart/alternative; boundary=#{delimiter}))
+    add_smtp_header_line(body, "Content-Type", ~s(multipart/alternative; boundary="#{delimiter}"))
   end
 
   defp add_multipart_mixed_header(body, delimiter) do
-    add_smtp_header_line(body, "Content-Type", ~s(multipart/mixed; boundary=#{delimiter}))
+    add_smtp_header_line(body, "Content-Type", ~s(multipart/mixed; boundary="#{delimiter}"))
   end
 
   defp add_smtp_header_line(body, type, content) when is_list(content) do
@@ -171,7 +171,7 @@ defmodule Bamboo.SMTPAdapter do
     "#{body}Content-Type: text/plain; charset=ISO-8859-1; name=\"#{filename}\"\r\n" <>
     "Content-Disposition: attachment; filename=\"#{filename}\"\r\n" <>
     "Content-Transfer-Encoding: base64\r\n" <>
-    "X-Attachment-Id: f_isu9uy5p0\r\n"    
+    "X-Attachment-Id: f_isu9uy5p0\r\n"
   end
 
   defp add_attachment_body(body, attachment) do
